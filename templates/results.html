@@ -12,21 +12,43 @@
     <!-- Nav Bar Code End -->
 
     <!-- Body Code -->
-    <section>
-      <div class="container">
-        <!-- RESULTS WILL GO HERE -->
-        <h1>Hottest Spots In {{city}}</h1>
+    <h1>Hottest Spots In {{city}}</h1>
 
+    <div class="container">
+      <div class="results-container">
+        <div class="spot-box">
+          <h2>Example Spot</h2>
+
+          <ul>
+            <li>Heat Level: 100</li>
+            <li>Google Rating: 4.3</li>
+          </ul>
+
+          <div class="address-link">
+            <a href="http://maps.google.com/?q=">Directions</a>
+          </div>
+        </div>
         {% for spot in spots %}
-        <li>{{spot}}</li>
-        {% endfor %}
+        <div class="spot-box">
+          <h2>{{spot.name}}</h2>
 
-        <span
-          >NOTE: "Current Popularity: None" means the location is closed or
-          close to empty.</span
-        >
+          <ul>
+            <li>Heat Level: {{spot.current_popularity }}</li>
+            <li>Google Rating: {{spot.rating}}</li>
+          </ul>
+
+          <div class="address-link">
+            <a href="http://maps.google.com/?q={{spot.address}}">Directions</a>
+          </div>
+        </div>
+        {% endfor %}
       </div>
-    </section>
+
+      <span
+        >NOTE: "Current Popularity: None" means the location is closed or close
+        to empty.</span
+      >
+    </div>
     <!-- Body Code End-->
 
     <footer></footer>

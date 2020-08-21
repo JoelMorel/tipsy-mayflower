@@ -15,7 +15,7 @@ formatted_address_RVC = ['(Kaseys Kitchen & Cocktails), 23 N Park Ave, Rockville
                          '(Croxleys Great American Ale House), 7 S Park Ave, Rockville Centre, NY 11570', '(Dark Horse Tavern), 12 S Park Ave, Rockville Centre, NY 11570']
 
 
-def checkCityPopularity(cityName):
+def checkCity(cityName):
     responseData = {}
 
     if cityName == 'NYC':

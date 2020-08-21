@@ -56,7 +56,7 @@ def submit():
         # location = request.form['location']
         if city == '':
             return render_template('index.html')
-        pop_spots = get_popularity.checkCityPopularity(city)
+        pop_spots = get_popularity.checkCity(city)
         return render_template('results.html', city=city, spots=pop_spots)
 
 

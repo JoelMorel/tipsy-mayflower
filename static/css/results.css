@@ -1,0 +1,38 @@
+h1 {
+  text-align: center;
+  font-size: larger;
+  color: black;
+  font-weight: 700;
+  padding: 40px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid black;
+}
+.container .results-container {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr;
+  column-gap: 2rem;
+  row-gap: 1rem;
+}
+
+.container .results-container .spot-box {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid black;
+  padding: 30px;
+}
+
+.container .results-container .spot-box .address-link {
+}
+/* Mobile code starts here */
+
+@media only screen and (max-width: 960px) {
+}
+
+@media only screen and (max-width: 767px) {
+}
