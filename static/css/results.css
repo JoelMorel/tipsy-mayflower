@@ -1,9 +1,9 @@
-h1 {
+.title {
   text-align: center;
-  font-size: larger;
+  font-size: 3rem;
   color: black;
   font-weight: 700;
-  padding: 40px;
+  padding: 20px;
   margin-bottom: 20px;
 }
 
@@ -15,7 +15,7 @@ h2 {
 }
 .container .results-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   column-gap: 2rem;
   row-gap: 1rem;
 }
@@ -24,11 +24,16 @@ h2 {
   display: flex;
   flex-direction: column;
   border: 3px solid black;
-  padding: 30px;
+  padding: 20px;
 }
 
-.container .results-container .spot-box .address-link {
+.container .results-container .spot-box .bottom-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1rem;
 }
+
 /* Mobile code starts here */
 
 @media only screen and (max-width: 960px) {

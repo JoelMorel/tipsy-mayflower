@@ -4,30 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../static/css/main.css" />
-    <title>Tipsy Tips Results</title>
+    <title>Hottest Spots</title>
   </head>
   <body>
     <!-- Nav Bar Code -->
-    <nav></nav>
+
     <!-- Nav Bar Code End -->
 
     <!-- Body Code -->
-    <h1>Hottest Spots In {{city}}</h1>
 
     <div class="container">
+      <h1 class="title">Hottest Spots In {{city}}</h1>
+
       <div class="results-container">
-        <div class="spot-box">
-          <h2>Example Spot</h2>
-
-          <ul>
-            <li>Heat Level: 100</li>
-            <li>Google Rating: 4.3</li>
-          </ul>
-
-          <div class="address-link">
-            <a href="http://maps.google.com/?q=">Directions</a>
-          </div>
-        </div>
         {% for spot in spots %}
         <div class="spot-box">
           <h2>{{spot.name}}</h2>
@@ -35,10 +24,18 @@
           <ul>
             <li>Heat Level: {{spot.current_popularity }}</li>
             <li>Google Rating: {{spot.rating}}</li>
+            <li>Address: {{spot.address}}</li>
           </ul>
 
-          <div class="address-link">
-            <a href="http://maps.google.com/?q={{spot.address}}">Directions</a>
+          <div class="bottom-section">
+            <div class="address-link">
+              <a href="https://maps.google.com/?q={{spot.address}}"
+                >Directions</a
+              >
+            </div>
+            <div class="more-info">
+              <a href="#">More Info</a>
+            </div>
           </div>
         </div>
         {% endfor %}
