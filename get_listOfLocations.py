@@ -11,7 +11,7 @@ def createList(location):
     parameters = {  # 'term': term,
         'location': location,
         'categories': 'nightlife',
-        'limit': 40
+        'limit': 30
     }
 
     try:
