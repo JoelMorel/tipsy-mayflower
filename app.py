@@ -26,16 +26,17 @@ def index():
 @app.route('/submit', methods=['POST'])
 def submit():
     if request.method == 'POST':
-        city = request.form['city']
         location = request.form['location']
+        city = request.form['city']
 
         if city == '' and location == '':
             return render_template('index.html')
         if city != '' and location != '':
             city = ''
-
-        pop_spots = get_popularity.checkCity(location)
-        return render_template('results.html', location=location, spots=pop_spots)
+        if city != '' and location == '':
+            location = city
+        hotSpots, notHopSpots = get_popularity.checkCity(location)
+        return render_template('results.html', location=location, spots=hotSpots, notHotSpots=notHopSpots)
 
 
 if __name__ == '__main__':

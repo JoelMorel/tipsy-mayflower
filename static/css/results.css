@@ -1,4 +1,13 @@
-.title {
+.hotspots-title {
+  text-align: center;
+  font-size: 3rem;
+  color: black;
+  font-weight: 700;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.nothot-title {
   text-align: center;
   font-size: 3rem;
   color: black;

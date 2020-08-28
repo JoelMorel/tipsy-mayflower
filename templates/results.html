@@ -14,12 +14,12 @@
     <!-- Body Code -->
 
     <div class="container">
-      <h1 class="title">
+      <h1 class="hotspots-title">
         Hottest Spots In: <span class="location">{{location}}</span>
       </h1>
 
       <div class="results-container">
-        {% for spot in spots %} {% if spot.current_popularity != None %}
+        {% for spot in spots %}
         <div class="spot-box">
           <h2>{{spot.name}}</h2>
 
@@ -40,8 +40,32 @@
             </div>
           </div>
         </div>
+        {% endfor %}
 
-        {% else %} {% endif %} {% endfor %}
+        <h1 class="nothot-title">Not So Hot Right Now:</h1>
+
+        {% for spot in notHotSpots %}
+        <div class="spot-box">
+          <h2>{{spot.name}}</h2>
+
+          <ul>
+            <li>Heat Level: {{spot.current_popularity}}</li>
+            <li>Google Rating: {{spot.rating}}</li>
+            <li>Address: {{spot.address}}</li>
+          </ul>
+
+          <div class="bottom-section">
+            <div class="address-link">
+              <a href="https://maps.google.com/?q={{spot.address}}"
+                >Directions</a
+              >
+            </div>
+            <div class="more-info">
+              <a href="#">More Info</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
       </div>
     </div>
     <!-- Body Code End-->

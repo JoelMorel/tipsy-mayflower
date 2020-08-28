@@ -10,23 +10,27 @@ def createList(location):
 
     parameters = {  # 'term': term,
         'location': location,
-        'categories': 'nightlife, restaurants'
+        'categories': 'nightlife',
+        'limit': 40
     }
 
-    response = requests.get(url=endpoint, params=parameters, headers=headers)
+    try:
+        response = requests.get(
+            url=endpoint, params=parameters, headers=headers)
+        search_results = response.json()
+        spots = search_results['businesses']
+        formatted_address = []
+        for spot in spots:
+            name = spot['name']
+            for key, value in spot['location'].items():
+                if key == 'display_address':
+                    if len(value) == 2:
+                        new = value[0] + ', ' + value[1]
+                    else:
+                        new = value[0]+', ' + value[1] + ' ' + value[2]
+                    together = f'({name}), {new}'
 
-    search_results = response.json()
-    spots = search_results['businesses']
-    formatted_address = []
-    for spot in spots:
-        name = spot['name']
-        for key, value in spot['location'].items():
-            if key == 'display_address':
-                if len(value) == 2:
-                    new = value[0] + ', ' + value[1]
-                else:
-                    new = value[0]+', ' + value[1] + ' ' + value[2]
-                together = f'({name}), {new}'
-
-                formatted_address.append(together)
+                    formatted_address.append(together)
+    except(IndexError, KeyError, TypeError):
+        print('ERROR in call: ')
     return formatted_address

@@ -10,16 +10,18 @@ proxy = 0
 
 
 def checkCity(location):
-    responseData = {}
+    # responseData = {}
 
-    responseList = getList(location)
+    popularList, notPopularList = getList(location)
     # places = livepopulartimes.get_places_by_search("bars open in New York")
     # print(places)
-    return responseList
+    return popularList, notPopularList
 
 
 def getList(location):
-    responseData = {}
+    popularData = {}
+    notPopularData = {}
+
     listOfLocations = get_listOfLocations.createList(location)
     for i in listOfLocations:
         try:
@@ -27,15 +29,24 @@ def getList(location):
                 i, proxy=proxy)
             if response['current_popularity'] != None:
                 name = response['name']
-                print(name)
+                print('popular: ' + name)
                 address = response['address']
                 current_popularity = response['current_popularity']
                 rating = response['rating']
                 latitude = response['coordinates']['lat']
                 longitude = response['coordinates']['lng']
-                responseData[i] = dict(name=name, address=address,
-                                       current_popularity=current_popularity, rating=rating, lat=latitude, lng=longitude)
+                popularData[i] = dict(name=name, address=address,
+                                      current_popularity=current_popularity, rating=rating, lat=latitude, lng=longitude)
+            else:
+                name = response['name']
+                print('Not popular: ' + name)
+                address = response['address']
+                current_popularity = response['current_popularity']
+                rating = response['rating']
+                notPopularData[i] = dict(name=name, address=address,
+                                         current_popularity=current_popularity, rating=rating)
         except(IndexError, KeyError, TypeError):
             print('ERROR in call: ' + i)
-    popularList = responseData.values()
-    return popularList
+    popularList = popularData.values()
+    notPopularList = notPopularData.values()
+    return popularList, notPopularList
