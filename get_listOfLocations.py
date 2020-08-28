@@ -1,18 +1,17 @@
-# url https://api.yelp.com/v3/businesses/search
 import requests
-api_key = 'gu4yF1nV3aomwzYAKYWMQ7H0mg-1ZpixLO-XgsvESWQqCIfSG2hUZIwEYLx42DzxPnEGdOS7t-qV0biZ3brXyObKdeu4o78tBINCgq2JuqE-MYiKY6mJ03ltQwY7X3Yx'
+api_key = '5EwGXrez61sYdXlbdrlyeW6EISyx3DDZ9T0NxHZ5ucimTXzyZ7FTVDVzBMwvhx9S1ZQPrlphoAXjadiZQZp0CahlCy-QoV9IzWrvcSDgk885cCsSNsLLpDJsC1dHX3Yx'
 endpoint = 'https://api.yelp.com/v3/businesses/search'
 headers = {'Authorization': 'bearer %s' % api_key}
 
 
 def createList(location):
-    term = 'bars'
+    #term = 'clubs'
     # location = str(input('What is the address of the venue? '))
 
-    parameters = {'term': term,
-                  'location': location,
-                  'categories': 'bars,clubs,nightlife'
-                  }
+    parameters = {  # 'term': term,
+        'location': location,
+        'categories': 'nightlife, restaurants'
+    }
 
     response = requests.get(url=endpoint, params=parameters, headers=headers)
 
@@ -30,5 +29,4 @@ def createList(location):
                 together = f'({name}), {new}'
 
                 formatted_address.append(together)
-    print(formatted_address)
     return formatted_address
