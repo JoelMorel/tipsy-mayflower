@@ -1,21 +1,10 @@
 from flask import Flask, render_template, request
-from flask_sqlalchemy import SQLAlchemy
+from flask_talisman import Talisman
 import get_popularity
-import mysql.connector
+
 app = Flask(__name__)
-
-ENV = 'dev'
-proxy = 0
-
-if ENV == 'dev':
-    app.env = 'dev'
-    app.debug = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = ''
-else:
-    app.debug = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = ''
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+SELF = "'self'"
+Talisman(app)
 
 
 @app.route('/')
@@ -40,4 +29,4 @@ def submit():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

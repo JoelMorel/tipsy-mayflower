@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from LivePopularTimes import livepopulartimes
 import get_listOfLocations
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
 # Set Up Vsariables
 app_key = 'EXAMPLEKEY'
