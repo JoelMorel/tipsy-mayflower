@@ -1,6 +1,7 @@
 @import "reset.css";
 @import "navbar.css";
 @import "results.css";
+@import "card.css";
 
 * {
   /* box-sizing: border-box; */
@@ -16,7 +17,7 @@ body {
 }
 
 .container {
-  max-width: 650px;
+  max-width: 950px;
   margin: 1rem auto;
   overflow: auto;
   padding: 0 2rem;
@@ -66,6 +67,11 @@ textarea {
   cursor: pointer;
   outline: none;
   margin-top: 1rem;
+}
+
+#footer {
+}
+.footer-container {
 }
 
 /* Mobile code starts here */

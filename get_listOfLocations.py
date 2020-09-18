@@ -5,8 +5,6 @@ headers = {'Authorization': 'bearer %s' % api_key}
 
 
 def createList(location):
-    #term = 'clubs'
-    # location = str(input('What is the address of the venue? '))
 
     parameters = {  # 'term': term,
         'location': location,

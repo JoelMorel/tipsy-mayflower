@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request
-from flask_talisman import Talisman
+from flask import Flask, jsonify, request, render_template
+# from flask_talisman import Talisman
 import get_popularity
+import heatmap
+import json
 
-app = Flask(__name__)
+ENV = 'dev'
 SELF = "'self'"
-Talisman(app)
+app = Flask(__name__)
+# Talisman(app)
 
 
 @app.route('/')
@@ -14,18 +17,23 @@ def index():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    if request.method == 'POST':
-        location = request.form['location']
-        city = request.form['city']
+    try:
+        if request.method == 'POST':
+            location = request.form['location']
+            city = request.form['city']
 
-        if city == '' and location == '':
-            return render_template('index.html')
-        if city != '' and location != '':
-            city = ''
-        if city != '' and location == '':
-            location = city
-        hotSpots, notHopSpots = get_popularity.checkCity(location)
-        return render_template('results.html', location=location, spots=hotSpots, notHotSpots=notHopSpots)
+            if city == '' and location == '':
+                return render_template('index.html')
+            if city != '' and location != '':
+                city = ''
+            if city != '' and location == '':
+                location = city
+            hotSpots, notHopSpots = get_popularity.checkCity(location)
+            # serializedHotSpots = json.dumps(hotSpots)
+            # print(hotSpots[0][0]['lat'])
+            return render_template('results.html', location=location, spots=hotSpots, notHotSpots=notHopSpots)
+    except(IndexError, KeyError, TypeError):
+        print('ERROR in call: ')
 
 
 if __name__ == '__main__':

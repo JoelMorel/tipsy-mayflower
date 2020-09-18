@@ -2,9 +2,7 @@ from flask import Flask, render_template, request
 from LivePopularTimes import livepopulartimes
 import get_listOfLocations
 
-# app = Flask(__name__)
-
-# Set Up Vsariables
+# Set Up Variables
 app_key = 'EXAMPLEKEY'
 proxy = 0
 
@@ -33,20 +31,23 @@ def getList(location):
                 address = response['address']
                 current_popularity = response['current_popularity']
                 rating = response['rating']
+                categories = response['categories']
                 latitude = response['coordinates']['lat']
                 longitude = response['coordinates']['lng']
                 popularData[i] = dict(name=name, address=address,
-                                      current_popularity=current_popularity, rating=rating, lat=latitude, lng=longitude)
+                                      current_popularity=current_popularity, rating=rating, cat=categories, lat=latitude, lng=longitude)
             else:
                 name = response['name']
                 print('Not popular: ' + name)
                 address = response['address']
                 current_popularity = response['current_popularity']
                 rating = response['rating']
+                categories = response['categories']
                 notPopularData[i] = dict(name=name, address=address,
-                                         current_popularity=current_popularity, rating=rating)
+                                         current_popularity=current_popularity, rating=rating, cat=categories)
         except(IndexError, KeyError, TypeError):
             print('ERROR in call: ' + i)
+    # print('popularData dict: ' + popularData)
     popularList = popularData.values()
     notPopularList = notPopularData.values()
     return popularList, notPopularList
