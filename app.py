@@ -4,10 +4,7 @@ import get_popularity
 import heatmap
 import json
 
-ENV = 'dev'
-SELF = "'self'"
 app = Flask(__name__)
-# Talisman(app)
 
 
 @app.route('/')

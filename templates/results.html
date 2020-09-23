@@ -20,7 +20,7 @@
 
     <div class="container">
       <h1 class="hotspots-title">
-        Hottest Spots In: <span class="location">{{location}}</span>
+        Hot Spots In: <span class="location">{{location}}</span>
       </h1>
 
       <div class="hotspots-container">
@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="tags">
-            <a href="#">$$$</a>
+            <!-- <a href="#">$$$</a> -->
             <a href="#">{{spot.rating}}</a>
             <a href="#">{{spot.cat[0]}}</a>
             <a href="https://maps.google.com/?q={{spot.address}}">Directions</a>
@@ -80,7 +80,6 @@
             </div>
           </div>
           <div class="tags">
-            <a href="#">$$$</a>
             <a href="#">{{spot.rating}}</a>
             <a href="#">{{spot.cat[0]}}</a>
             <a href="https://maps.google.com/?q={{spot.address}}">Directions</a>
@@ -104,7 +103,9 @@
 
     <!-- Body Code End-->
 
-    <footer></footer>
+    <footer>
+      <span>Copyright &copy2020</span>
+    </footer>
     <script type="text/javascript">
       var loc = `{{ location }}`;
       var points = `{{ spots }}`;

@@ -13,7 +13,7 @@
   color: black;
   font-weight: 700;
   padding: 20px;
-  margin-bottom: 20px;
+  margin-top: 50px;
 }
 
 .location {
@@ -43,7 +43,7 @@ h2 {
 
 /* ***************Heat Map CSS******************  */
 .map-wrapper {
-  margin-top: 2rem;
+  margin-top: 100px;
 }
 
 #floating-panel {
@@ -63,19 +63,19 @@ h2 {
 /* Mobile code starts here */
 
 @media only screen and (max-width: 960px) {
-  .container .results-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 2rem;
-    row-gap: 1rem;
+  .container .hotspots-container {
+    display: flex;
+  }
+  .container .nothot-container {
+    display: flex;
   }
 }
 
 @media only screen and (max-width: 767px) {
-  .container .results-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    column-gap: 2rem;
-    row-gap: 1rem;
+  .container .hotspots-container {
+    display: flex;
+  }
+  .container .nothot-container {
+    display: flex;
   }
 }
