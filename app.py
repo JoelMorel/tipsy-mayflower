@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request, render_template
 # from flask_talisman import Talisman
 import get_popularity
-import heatmap
 import json
 
 app = Flask(__name__)
