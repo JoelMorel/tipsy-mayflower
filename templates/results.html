@@ -41,6 +41,10 @@
 
     <!-- Body Code -->
 
+    <div class="spinner-wrapper">
+      <div class="spinner"></div>
+    </div>
+
     <div class="container">
       <h1 class="hotspots-title">
         Hot Spots In: <span class="location">{{location}}</span>
@@ -147,6 +151,20 @@
         } else {
           $(".nav").removeClass("affix");
         }
+      });
+    </script>
+
+    <script>
+      let spinnerWrapper = document.querySelector(".spinner-wrapper");
+
+      window.addEventListener("load", function () {
+        spinnerWrapper.style.display = "none";
+      });
+    </script>
+    <script>
+      $(window).load(function () {
+        //Do the code in the {}s when the window has loaded
+        $(".loader").fadeOut("fast"); //Fade out the #loader div
       });
     </script>
 

@@ -25,7 +25,7 @@
 }
 
 .nav div.logo a:hover {
-  color: #00e676;
+  color: #000;
 }
 
 .nav div.main_list {
@@ -53,11 +53,11 @@
   text-decoration: none;
   color: #fff;
   line-height: 65px;
-  font-size: 2.4rem;
+  font-size: 1rem;
 }
 
 .nav div.main_list ul li a:hover {
-  color: #00e676;
+  color: #000;
 }
 
 .navTrigger {
@@ -122,7 +122,6 @@
 }
 
 /* Animation */
-/* Inspiration taken from Dicson https://codemyui.com/simple-hamburger-menu-x-mark-animation/ */
 
 .navTrigger {
   cursor: pointer;
@@ -131,7 +130,7 @@
   margin: auto;
   position: absolute;
   right: 30px;
-  top: 0;
+  top: auto;
   bottom: 0;
 }
 
