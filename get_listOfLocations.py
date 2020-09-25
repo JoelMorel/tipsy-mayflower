@@ -9,7 +9,7 @@ def createList(location):
     parameters = {'term': 'open now',
                   'location': location,
                   'categories': 'nightlife',
-                  'limit': 35
+                  'limit': 30
                   }
 
     try:
