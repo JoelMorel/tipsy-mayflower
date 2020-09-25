@@ -6,11 +6,11 @@ headers = {'Authorization': 'bearer %s' % api_key}
 
 def createList(location):
 
-    parameters = {  # 'term': term,
-        'location': location,
-        'categories': 'nightlife',
-        'limit': 30
-    }
+    parameters = {'term': 'open now',
+                  'location': location,
+                  'categories': 'nightlife',
+                  'limit': 35
+                  }
 
     try:
         response = requests.get(
