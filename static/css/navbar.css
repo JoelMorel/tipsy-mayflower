@@ -88,6 +88,8 @@
     width: 100%;
     height: 0;
     overflow: hidden;
+    position: relative;
+    z-index: 1;
   }
   .nav div.show_list {
     height: auto;

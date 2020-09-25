@@ -14,7 +14,7 @@
 
   <body>
     <!-- Nav Bar Code -->
-    <!-- <nav class="nav">
+    <nav class="nav">
       <div class="nav-container">
         <div class="logo">
           <a href="/"
@@ -36,7 +36,7 @@
           <i></i>
         </span>
       </div>
-    </nav> -->
+    </nav>
     <!-- Nav Bar Code End -->
 
     <!-- Body Code -->
@@ -73,7 +73,6 @@
             </div>
           </div>
           <div class="tags">
-            <!-- <a href="#">$$$</a> -->
             <a href="#">{{spot.rating}}</a>
             <a href="#">{{spot.cat[0]}}</a>
             <a href="https://maps.google.com/?q={{spot.address}}">Directions</a>
@@ -82,7 +81,7 @@
         {% endfor %}
       </div>
 
-      <h1 class="nothot-title">Not So Hot Right Now:</h1>
+      <h1 class="nothot-title">Honorable Mentions:</h1>
 
       <div class="nothot-container">
         {% for spot in notHotSpots %}
@@ -151,20 +150,6 @@
         } else {
           $(".nav").removeClass("affix");
         }
-      });
-    </script>
-
-    <script>
-      let spinnerWrapper = document.querySelector(".spinner-wrapper");
-
-      window.addEventListener("load", function () {
-        spinnerWrapper.style.display = "none";
-      });
-    </script>
-    <script>
-      $(window).load(function () {
-        //Do the code in the {}s when the window has loaded
-        $(".loader").fadeOut("fast"); //Fade out the #loader div
       });
     </script>
 

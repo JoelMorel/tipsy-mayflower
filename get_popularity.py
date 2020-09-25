@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from LivePopularTimes import livepopulartimes
 import get_listOfLocations
+import threading
 
 # Set Up Variables
 app_key = 'EXAMPLEKEY'
@@ -8,11 +9,7 @@ proxy = 0
 
 
 def checkCity(location):
-    # responseData = {}
-
     popularList, notPopularList = getList(location)
-    # places = livepopulartimes.get_places_by_search("bars open in New York")
-    # print(places)
     return popularList, notPopularList
 
 

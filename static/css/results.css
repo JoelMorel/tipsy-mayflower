@@ -18,6 +18,10 @@ body {
   padding: 0 2rem;
 }
 
+img {
+  width: 100%;
+}
+
 .hotspots-title {
   text-align: center;
   font-size: 3rem;
