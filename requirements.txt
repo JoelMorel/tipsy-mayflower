@@ -1,3 +1,4 @@
+astroid==2.4.2
 autopep8==1.5.4
 certifi==2020.6.20
 chardet==3.0.4
@@ -8,14 +9,21 @@ geographiclib==1.50
 geopy==2.0.0
 gunicorn==20.0.4
 idna==2.10
+isort==5.6.4
 itsdangerous==1.1.0
 Jinja2==2.11.2
+lazy-object-proxy==1.4.3
+LivePopularTimes @ git+https://github.com/JoelMorel/LivePopularTimes@ac406730059b2efe36635c0d4954db8fbdf53880
 MarkupSafe==1.1.1
+mccabe==0.6.1
 mysql-connector==2.2.9
 populartimes @ git+https://github.com/m-wrzr/populartimes@e9e9ac48ea86449eeea143af24e590e71b0ecce9
 pycodestyle==2.6.0
+pylint==2.6.0
 requests==2.24.0
+six==1.15.0
 SQLAlchemy==1.3.18
 toml==0.10.1
 urllib3==1.25.10
 Werkzeug==1.0.1
+wrapt==1.12.1
