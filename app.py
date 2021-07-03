@@ -1,17 +1,16 @@
 from flask import Flask, jsonify, request, render_template
-# from flask_talisman import Talisman
 import get_popularity
 import json
 
-app = Flask(__name__)
+tipsywallflower = Flask(__name__)
 
 
-@app.route('/')
+@tipsywallflower.route('/')
 def index():
     return render_template('index.html')
 
 
-@app.route('/submit', methods=['POST'])
+@tipsywallflower.route('/submit', methods=['POST'])
 def submit():
     try:
         if request.method == 'POST':

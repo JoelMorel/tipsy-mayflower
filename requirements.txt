@@ -3,6 +3,7 @@ autopep8==1.5.4
 certifi==2020.6.20
 chardet==3.0.4
 click==7.1.2
+docopt==0.6.2
 Flask==1.1.2
 Flask-SQLAlchemy==2.4.4
 geographiclib==1.50
@@ -17,6 +18,7 @@ LivePopularTimes @ git+https://github.com/JoelMorel/LivePopularTimes@ac406730059
 MarkupSafe==1.1.1
 mccabe==0.6.1
 mysql-connector==2.2.9
+pipreqs==0.4.10
 populartimes @ git+https://github.com/m-wrzr/populartimes@e9e9ac48ea86449eeea143af24e590e71b0ecce9
 pycodestyle==2.6.0
 pylint==2.6.0
@@ -27,3 +29,4 @@ toml==0.10.1
 urllib3==1.25.10
 Werkzeug==1.0.1
 wrapt==1.12.1
+yarg==0.1.9
