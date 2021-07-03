@@ -2,15 +2,15 @@ from flask import Flask, jsonify, request, render_template
 import get_popularity
 import json
 
-tipsywallflower = Flask(__name__)
+app = Flask(__name__)
 
 
-@tipsywallflower.route('/')
+@app.route('/')
 def index():
     return render_template('index.html')
 
 
-@tipsywallflower.route('/submit', methods=['POST'])
+@app.route('/submit', methods=['POST'])
 def submit():
     try:
         if request.method == 'POST':
@@ -32,4 +32,4 @@ def submit():
 
 
 if __name__ == '__main__':
-    tipsywallflower.run(debug=True)
+    app.run(debug=True)
