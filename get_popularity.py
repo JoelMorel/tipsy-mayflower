@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 # from lib import LivePopularTimes
-import livepopulartimes
+from lib.LivePopularTimes import livepopulartimes
 import get_listOfLocations
 # import threading
 
