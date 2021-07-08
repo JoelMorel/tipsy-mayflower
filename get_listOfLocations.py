@@ -10,8 +10,8 @@ def createList(location):
 
     parameters = {'term': '',
                   'location': location,
-                  'categories': 'nightlife',
-                  'limit': 30,
+                  'categories': ["bars", "lounges", "beergardens", "clubcrawl", "danceclubs"],
+                  'limit': 50,
                   'open_now': True,
                   }
 
