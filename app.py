@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, render_template
 import get_popularity
-import json
+import os
 
 app = Flask(__name__)
 
@@ -31,5 +31,10 @@ def submit():
         print('ERROR in call: ')
 
 
+# if __name__ == '__main__':
+#     app.run(debug=True)
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Bind to PORT if defined, otherwise default to 5000.
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
