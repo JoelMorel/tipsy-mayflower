@@ -4,6 +4,3 @@
 [submodule "populartimes"]
 	path = populartimes
 	url = https://github.com/JoelMorel/populartimes
-[submodule "lib/LivePopularTimes"]
-	path = lib/LivePopularTimes
-	url = git://github.com/JoelMorel/LivePopularTimes.git
