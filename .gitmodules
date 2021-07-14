@@ -1,6 +1,6 @@
-[submodule "LivePopularTimes"]
-	path = LivePopularTimes
-	url = https://github.com/JoelMorel/LivePopularTimes
 [submodule "populartimes"]
 	path = populartimes
 	url = https://github.com/JoelMorel/populartimes
+[submodule "LivePopularTimes"]
+	path = LivePopularTimes
+	url = https://github.com/JoelMorel/LivePopularTimes
