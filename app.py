@@ -16,6 +16,7 @@ def submit():
         if request.method == 'POST':
             location = request.form['location']
             city = request.form['city']
+            venue = request.form['venue']
 
             if city == '' and location == '':
                 return render_template('index.html')
@@ -23,7 +24,7 @@ def submit():
                 city = ''
             if city != '' and location == '':
                 location = city
-            hotSpots, notHopSpots = get_popularity.checkCity(location)
+            hotSpots, notHopSpots = get_popularity.checkCity(location, venue)
             # serializedHotSpots = json.dumps(hotSpots)
             # print(hotSpots[0][0]['lat'])
             return render_template('results.html', location=location, spots=hotSpots, notHotSpots=notHopSpots)

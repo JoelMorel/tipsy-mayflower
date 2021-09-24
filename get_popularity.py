@@ -8,16 +8,16 @@ app_key = 'EXAMPLEKEY'
 proxy = 0
 
 
-def checkCity(location):
-    popularList, notPopularList = getList(location)
+def checkCity(location, venue):
+    popularList, notPopularList = getList(location, venue)
     return popularList, notPopularList
 
 
-def getList(location):
+def getList(location, venue):
     popularData = {}
     notPopularData = {}
 
-    listOfLocations = get_listOfLocations.createList(location)
+    listOfLocations = get_listOfLocations.createList(location, venue)
     for i in listOfLocations:
         try:
             response = livepopulartimes.get_populartimes_by_address(

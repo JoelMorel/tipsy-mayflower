@@ -6,11 +6,11 @@ endpoint = 'https://api.yelp.com/v3/businesses/search'
 headers = {'Authorization': 'bearer %s' % api_key}
 
 
-def createList(location):
+def createList(location, venue):
 
-    parameters = {'term': '',
+    parameters = {'term': venue,
                   'location': location,
-                  'categories': ["lounges", "beergardens", "clubcrawl", "danceclubs"],
+                  'categories': venue,
                   'limit': 30,
                   'open_now': True,
                   }
