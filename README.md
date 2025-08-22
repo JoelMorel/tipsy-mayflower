@@ -10,6 +10,7 @@ Modernized Flask app (2025-ready) with enhanced security, monitoring, and perfor
 - **Venue Types**: Support for bars, lounges, night clubs, and more
 - **Heatmap Visualization**: Interactive Google Maps with popularity data
 - **Real-time Data**: Uses Google Places API for current popularity information
+- **Interactive Loader**: Beautiful loading animation with progress tracking during searches
 
 ### Security & Performance
 

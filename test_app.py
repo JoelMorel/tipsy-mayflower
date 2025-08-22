@@ -81,6 +81,22 @@ def test_input_validation():
         print(f"Error: {e}")
         return False
 
+def test_loader_functionality():
+    """Test that the loader shows up on form submission."""
+    print("\nTesting loader functionality...")
+    try:
+        # This is a frontend test, so we'll just verify the page loads
+        response = requests.get(f"{BASE_URL}/")
+        if response.status_code == 200 and 'loading-overlay' in response.text:
+            print("✓ Loading overlay HTML found in page")
+            return True
+        else:
+            print("✗ Loading overlay HTML not found")
+            return False
+    except Exception as e:
+        print(f"Error: {e}")
+        return False
+
 def main():
     """Run all tests."""
     print("Starting Flask app tests...")
@@ -90,6 +106,7 @@ def main():
         ("Health Endpoint", test_health_endpoint),
         ("Index Page", test_index_page),
         ("Input Validation", test_input_validation),
+        ("Loader Functionality", test_loader_functionality),
         ("Rate Limiting", test_rate_limiting),
     ]
     

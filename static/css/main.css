@@ -149,6 +149,156 @@ footer {
   transform: translateY(-2px);
 }
 
+/* Loading overlay styles */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-content {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+}
+
+.loading-content h3 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.loading-content p {
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #e73c7e;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 2rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Progress bar styles */
+.progress-container {
+  margin: 2rem 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e73c7e, #23a6d5);
+  width: 0%;
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+}
+
+/* Loading steps styles */
+.loading-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+  background: rgba(231, 60, 126, 0.1);
+}
+
+.step-number {
+  width: 24px;
+  height: 24px;
+  background: #e73c7e;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.step-text {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Cancel button styles */
+.btn-cancel {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.btn-cancel:hover {
+  background: #ff5252;
+  transform: translateY(-2px);
+}
+
+/* Disabled button styles */
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background-image: linear-gradient(90deg, #666, #999);
+}
+
 /* Mobile code starts here */
 
 @media only screen and (max-width: 960px) {
@@ -160,5 +310,32 @@ footer {
     margin: 1rem auto;
     overflow: auto;
     padding: 0 2rem;
+  }
+
+  /* Mobile loading overlay adjustments */
+  .loading-content {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+    max-width: 90%;
+  }
+
+  .loading-content h3 {
+    font-size: 1.3rem;
+  }
+
+  .loading-content p {
+    font-size: 0.9rem;
+  }
+
+  .loading-steps {
+    gap: 0.8rem;
+  }
+
+  .step {
+    padding: 0.4rem;
+  }
+
+  .step-text {
+    font-size: 0.8rem;
   }
 }

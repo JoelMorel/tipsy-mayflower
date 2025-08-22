@@ -122,6 +122,42 @@
       </div>
     </section>
 
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <h3>Searching for the hottest spots...</h3>
+        <p>This may take a few moments while we gather real-time data</p>
+
+        <!-- Progress bar -->
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+          <div class="progress-text">Initializing search...</div>
+        </div>
+
+        <!-- Loading steps -->
+        <div class="loading-steps">
+          <div class="step active" data-step="1">
+            <span class="step-number">1</span>
+            <span class="step-text">Searching venues...</span>
+          </div>
+          <div class="step" data-step="2">
+            <span class="step-number">2</span>
+            <span class="step-text">Gathering popularity data...</span>
+          </div>
+          <div class="step" data-step="3">
+            <span class="step-number">3</span>
+            <span class="step-text">Preparing results...</span>
+          </div>
+        </div>
+
+        <!-- Cancel button -->
+        <button id="cancel-search" class="btn-cancel">Cancel Search</button>
+      </div>
+    </div>
+
     <footer>
       <span>Copyright &copy;{{ year }}</span>
     </footer>
@@ -139,6 +175,97 @@
           console.log("OK");
         } else {
           $(".nav").removeClass("affix");
+        }
+      });
+    </script>
+
+    <!-- Loading functionality -->
+    <script>
+      $(document).ready(function () {
+        // Handle form submission
+        $('form[name="form-location"]').on("submit", function (e) {
+          // Validate form before showing loader
+          var location = $('input[name="location"]').val().trim();
+          var venue = $('select[name="venue"]').val();
+
+          if (!location) {
+            e.preventDefault();
+            alert("Please enter a location to search for.");
+            return false;
+          }
+
+          if (!venue) {
+            e.preventDefault();
+            alert("Please select a venue type.");
+            return false;
+          }
+
+          // Show loading overlay
+          $("#loading-overlay").fadeIn(300);
+
+          // Disable form submission button to prevent double-clicks
+          $('input[type="submit"]').prop("disabled", true).val("Searching...");
+
+          // Simulate progress and step transitions
+          simulateProgress();
+
+          // Form will submit normally after validation
+        });
+
+        // Hide loader if user navigates back or page refreshes
+        $(window).on("beforeunload", function () {
+          $("#loading-overlay").fadeOut(300);
+        });
+
+        // Cancel search functionality
+        $("#cancel-search").on("click", function () {
+          $("#loading-overlay").fadeOut(300);
+          $('input[type="submit"]').prop("disabled", false).val("Search");
+
+          // Reset form if needed
+          // $('form[name="form-location"]')[0].reset();
+        });
+
+        // Progress simulation function
+        function simulateProgress() {
+          var progress = 0;
+          var currentStep = 1;
+          var progressBar = $(".progress-fill");
+          var progressText = $(".progress-text");
+          var steps = $(".step");
+
+          var interval = setInterval(function () {
+            progress += Math.random() * 15 + 5; // Random progress increment
+
+            if (progress >= 100) {
+              progress = 100;
+              clearInterval(interval);
+            }
+
+            // Update progress bar
+            progressBar.css("width", progress + "%");
+
+            // Update progress text
+            if (progress < 30) {
+              progressText.text("Searching venues...");
+            } else if (progress < 60) {
+              progressText.text("Gathering popularity data...");
+              if (currentStep === 1) {
+                steps.removeClass("active");
+                steps.filter('[data-step="2"]').addClass("active");
+                currentStep = 2;
+              }
+            } else if (progress < 90) {
+              progressText.text("Preparing results...");
+              if (currentStep === 2) {
+                steps.removeClass("active");
+                steps.filter('[data-step="3"]').addClass("active");
+                currentStep = 3;
+              }
+            } else {
+              progressText.text("Almost done...");
+            }
+          }, 200);
         }
       });
     </script>
