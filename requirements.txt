@@ -1,8 +1,7 @@
 Flask==3.0.3
-waitress==2.1.2
+gunicorn==22.0.0
 requests==2.32.3
 python-dotenv==1.0.1
 setuptools>=65.0.0
 wheel
 LivePopularTimes @ git+https://github.com/JoelMorel/LivePopularTimes@ac406730059b2efe36635c0d4954db8fbdf53880
-EOF
