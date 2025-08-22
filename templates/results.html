@@ -2,23 +2,34 @@
 <html lang="en">
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-172739167-2"></script>  
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-172739167-2"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-      gtag('config', 'UA-172739167-2');
+      gtag("config", "UA-172739167-2");
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WhatIsLit? | Results</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    {% if google_maps_api_key %}
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeGaNjFcWO1efbZ4vxnQKcl5-H_6RQeCE&callback=initMap&libraries=visualization&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&callback=initMap&libraries=visualization&v=weekly"
       defer
     ></script>
-    <link rel="stylesheet" type="text/css" href="../static/css/results.css" />
+    {% endif %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/results.css') }}"
+    />
   </head>
 
   <body>
@@ -28,7 +39,7 @@
         <div class="logo">
           <a href="/"
             ><img
-              src="/static/img/d304cb2aa8604c0baf161bb63c28e76b.png"
+              src="{{ url_for('static', filename='img/d304cb2aa8604c0baf161bb63c28e76b.png') }}"
               alt=""
           /></a>
         </div>
@@ -69,7 +80,9 @@
 
           <div class="card-author">
             <a class="author-avatar" href="#">
-              <img src="../static/img/flame-fire-logo-symbol-png-clipart.jpg" />
+              <img
+                src="{{ url_for('static', filename='img/flame-fire-logo-symbol-png-clipart.jpg') }}"
+              />
             </a>
             <svg class="half-circle" viewBox="0 0 106 57">
               <path d="M102 4c0 27.1-21.9 49-49 49S4 31.1 4 4"></path>
@@ -102,7 +115,9 @@
 
           <div class="card-author">
             <a class="author-avatar" href="#">
-              <img src="../static/img/flame-fire-logo-symbol-png-clipart.jpg" />
+              <img
+                src="{{ url_for('static', filename='img/flame-fire-logo-symbol-png-clipart.jpg') }}"
+              />
             </a>
             <svg class="half-circle" viewBox="0 0 106 57">
               <path d="M102 4c0 27.1-21.9 49-49 49S4 31.1 4 4"></path>
@@ -139,16 +154,17 @@
     <!-- Body Code End-->
 
     <footer>
-      <span>Copyright &copy2021</span>
+      <span>Copyright &copy;{{ year }}</span>
     </footer>
 
     <!-- Scripts Start Here -->
     <script type="text/javascript">
       var loc = `{{ location }}`;
-      var points = `{{ spots }}`;
+      window.HEATMAP_POINTS = {{ heatmap_points|tojson|safe }};
+      window.HEATMAP_CENTER = {{ heatmap_center|tojson|safe }};
     </script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <!-- Function used to shrink nav bar removing paddings and adding black background -->
     <script>
@@ -162,7 +178,7 @@
       });
     </script>
 
-    <script src="../static/js/app.js"></script>
-    <script src="../static/js/heatmap.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/heatmap.js') }}"></script>
   </body>
 </html>

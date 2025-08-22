@@ -1,12 +1,16 @@
+import os
 import requests
 #import threading
 
-api_key = '5EwGXrez61sYdXlbdrlyeW6EISyx3DDZ9T0NxHZ5ucimTXzyZ7FTVDVzBMwvhx9S1ZQPrlphoAXjadiZQZp0CahlCy-QoV9IzWrvcSDgk885cCsSNsLLpDJsC1dHX3Yx'
 endpoint = 'https://api.yelp.com/v3/businesses/search'
-headers = {'Authorization': 'bearer %s' % api_key}
 
 
 def createList(location, venue):
+    api_key = os.environ.get('YELP_API_KEY')
+    if not api_key:
+        # Missing API key; fail gracefully
+        return []
+    headers = {'Authorization': f'bearer {api_key}'}
 
     parameters = {'term': venue,
                   'location': location,

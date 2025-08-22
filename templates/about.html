@@ -3,10 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
     <title>About Us</title>
   </head>
   <body>
+    <!-- Nav Bar Code -->
+    <nav class="nav">
+      <div class="nav-container">
+        <div class="logo">
+          <a href="/"
+            ><img
+              src="{{ url_for('static', filename='img/d304cb2aa8604c0baf161bb63c28e76b.png') }}"
+              alt=""
+          /></a>
+        </div>
+        <div id="mainListDiv" class="main_list">
+          <ul class="navlinks">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <span class="navTrigger">
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+      </div>
+    </nav>
+
+    <!-- Nav Bar Code End -->
+
     <h1>About Page</h1>
-    <h2>Coming Sonn!</h2>
+    <h2>Why was this created?</h2>
+    <p>This is idea was concieved at the height of the pandamic...</p>
+
+    <h2>How do I use the app?</h2>
+    <p>
+      First, in the search bar enter the city name you want to search for. It
+      can be any city, neighborhood, or zipcode that is available on Yelp.
+      Second, from the dropdown menu select the type of venue you are interested
+      in visting.
+    </p>
   </body>
 </html>

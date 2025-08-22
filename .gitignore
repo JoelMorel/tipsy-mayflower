@@ -1,2 +1,57 @@
-.vscode
-__pycache__
+.vscode/
+
+# macOS
+.DS_Store
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Test & type caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+.cache/
+
+# Coverage reports
+.coverage
+.coverage.*
+htmlcov/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Logs
+*.log
+
+# IDE/editor
+.idea/
+*.iml
+
+# Secrets and local env
+.env
+.env.*
+.python-version
+*.pem
+*.key
+*.crt
+
+# Local databases
+*.sqlite
+*.sqlite3
+instance/
+
+# Node (if used in future)
+node_modules/

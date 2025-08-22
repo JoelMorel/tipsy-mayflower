@@ -1,16 +1,17 @@
 let map, heatmap;
 
-function initMap() {
+window.initMap = function () {
+  const center = getCenter();
   map = new google.maps.Map(document.getElementById("map"), {
-    center: getLocation(),
+    center: center,
     mapTypeId: "roadmap",
-    zoom: 10,
+    zoom: 12,
   });
   heatmap = new google.maps.visualization.HeatmapLayer({
     data: getPoints(),
     map: map,
   });
-}
+};
 
 function toggleHeatmap() {
   heatmap.setMap(heatmap.getMap() ? null : map);
@@ -45,12 +46,24 @@ function changeOpacity() {
 }
 
 function getPoints() {
-  console.log(points);
-  return points;
+  const points = Array.isArray(window.HEATMAP_POINTS)
+    ? window.HEATMAP_POINTS
+    : [];
+  return points.map(function (p) {
+    return {
+      location: new google.maps.LatLng(p.lat, p.lng),
+      weight: typeof p.weight === "number" ? p.weight / 100 : 1,
+    };
+  });
 }
 
-function getLocation() {
-  var pointsObj = JSON.parse(points);
-  console.log(pointsObj);
-  return points[0];
+function getCenter() {
+  if (
+    window.HEATMAP_CENTER &&
+    typeof window.HEATMAP_CENTER.lat === "number" &&
+    typeof window.HEATMAP_CENTER.lng === "number"
+  ) {
+    return window.HEATMAP_CENTER;
+  }
+  return { lat: 40.7128, lng: -74.006 };
 }
