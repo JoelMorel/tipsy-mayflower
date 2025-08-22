@@ -1,1 +1,1 @@
-web: waitress-serve --bind=0.0.0.0:\$PORT app:app
+web: python -m waitress --bind=0.0.0.0:\$PORT app:app
