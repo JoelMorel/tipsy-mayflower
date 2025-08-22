@@ -18,6 +18,21 @@ FLASK_DEBUG=1
 SECRET_KEY=dev
 YELP_API_KEY=your_yelp_api_key
 GOOGLE_MAPS_API_KEY=your_gmaps_key
+
+## Local setup
+
+1. Create a `.env` file with the following variables (see `.env.example`):
+
+```
+
+SECRET_KEY=your_secret
+YELP_API_KEY=your_yelp_api_key
+GOOGLE_MAPS_API_KEY=your_gmaps_key
+FLASK_DEBUG=0
+
+```
+
+2. Never commit real secrets. The `.env` file is ignored by git.
 ```
 
 3. Run locally:
