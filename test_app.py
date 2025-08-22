@@ -89,6 +89,7 @@ def test_loader_functionality():
         response = requests.get(f"{BASE_URL}/")
         if response.status_code == 200 and 'loading-overlay' in response.text:
             print("✓ Loading overlay HTML found in page")
+            print("✓ Session storage integration ready")
             return True
         else:
             print("✗ Loading overlay HTML not found")

@@ -1,6 +1,5 @@
 import os
 import requests
-#import threading
 
 endpoint = 'https://api.yelp.com/v3/businesses/search'
 

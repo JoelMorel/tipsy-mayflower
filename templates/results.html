@@ -30,6 +30,11 @@
       type="text/css"
       href="{{ url_for('static', filename='css/results.css') }}"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
   </head>
 
   <body>
@@ -60,6 +65,39 @@
     <!-- Nav Bar Code End -->
 
     <!-- Body Code -->
+
+    <!-- Loading Overlay (will be shown if coming from search) -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <h3>Preparing your results...</h3>
+        <p>Almost done! Just a few more moments...</p>
+
+        <!-- Progress bar -->
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 90%"></div>
+          </div>
+          <div class="progress-text">Finalizing results...</div>
+        </div>
+
+        <!-- Loading steps -->
+        <div class="loading-steps">
+          <div class="step" data-step="1">
+            <span class="step-number">1</span>
+            <span class="step-text">Searching venues...</span>
+          </div>
+          <div class="step" data-step="2">
+            <span class="step-number">2</span>
+            <span class="step-text">Gathering popularity data...</span>
+          </div>
+          <div class="step active" data-step="3">
+            <span class="step-number">3</span>
+            <span class="step-text">Preparing results...</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="spinner-wrapper">
       <div class="spinner"></div>
@@ -174,6 +212,23 @@
           console.log("OK");
         } else {
           $(".nav").removeClass("affix");
+        }
+      });
+    </script>
+
+    <!-- Loading functionality for results page -->
+    <script>
+      $(document).ready(function () {
+        // Check if we're coming from a search submission
+        if (sessionStorage.getItem("isSearching") === "true") {
+          // Show loader immediately
+          $("#loading-overlay").show();
+
+          // Hide loader after a short delay to show completion
+          setTimeout(function () {
+            $("#loading-overlay").fadeOut(500);
+            sessionStorage.removeItem("isSearching");
+          }, 2000);
         }
       });
     </script>
