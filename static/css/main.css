@@ -93,8 +93,61 @@ footer {
   border-color: #000 #0000;
   animation: s1 1s infinite;
 }
-@keyframes s1 {to{transform: rotate(.5turn)}}
+@keyframes s1 {
+  to {
+    transform: rotate(0.5turn);
+  }
+}
 
+/* Error page styles */
+.error-page {
+  margin-top: 100px;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 3rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.error-container h1 {
+  font-size: 4rem;
+  color: #e73c7e;
+  margin-bottom: 1rem;
+}
+
+.error-container h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.error-container p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.btn-primary {
+  display: inline-block;
+  background-image: linear-gradient(90deg, #009bff, #2ac9db);
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
 
 /* Mobile code starts here */
 

@@ -50,6 +50,22 @@
 
         <h3 style="font-weight: bolder">1. Search For The City You Are In:</h3>
 
+        {% if error %}
+        <div
+          class="error-message"
+          style="
+            color: #ff4444;
+            background: #ffe6e6;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ffaaaa;
+          "
+        >
+          {{ error }}
+        </div>
+        {% endif %}
+
         <form action="/submit" method="POST" name="form-location">
           <div class="form-group">
             <input
