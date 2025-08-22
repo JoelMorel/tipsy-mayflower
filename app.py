@@ -13,7 +13,11 @@ app.config.from_object(Config)
 
 @app.route('/')
 def index():
-    return render_template('index.html', year=datetime.utcnow().year)
+    try:
+        return render_template('index.html', year=datetime.now().year)
+    except Exception as e:
+        print(f"Error in index route: {e}")
+        return "Error loading page", 500
 
 
 @app.route('/submit', methods=['POST'])
