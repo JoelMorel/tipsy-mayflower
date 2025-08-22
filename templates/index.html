@@ -101,13 +101,6 @@
           <div class="form-group">
             <select name="venue">
               <option value="">Select Type Of Venue:</option>
-              <!-- <optgroup label="New York City">
-                <option value="Manhattan">Manhattan</option>
-                <option value="Brooklyn">Brooklyn</option>
-                <option value="Queens">Queens</option>
-                <option value="Bronx">Bronx</option>
-                <option value="Staten Island">Staten Island</option>
-              </optgroup> -->
               <option value="bar">Bar</option>
               <option value="lounge">Lounge</option>
               <option value="beergardens">Beer Gardens</option>
@@ -181,128 +174,106 @@
 
     <!-- Loading functionality -->
     <script>
-              $(document).ready(function () {
-          // Check if we're coming from a search submission
-          if (sessionStorage.getItem('isSearching') === 'true') {
-            // Show loader immediately
-            $("#loading-overlay").show();
-            // Start progress simulation
-            simulateProgress();
+      $(document).ready(function () {
+        console.log("Page loaded, setting up loading functionality...");
+
+        // Test if loading overlay exists
+        if ($("#loading-overlay").length > 0) {
+          console.log("✓ Loading overlay found in DOM");
+        } else {
+          console.log("✗ Loading overlay NOT found in DOM");
+        }
+
+        // Handle form submission
+        $('form[name="form-location"]').on("submit", function (e) {
+          console.log("Form submitted!");
+
+          // Validate form before showing loader
+          var location = $('input[name="location"]').val().trim();
+          var venue = $('select[name="venue"]').val();
+
+          if (!location) {
+            e.preventDefault();
+            alert("Please enter a location to search for.");
+            return false;
           }
 
-          // Also check when the page is fully loaded (including images, etc.)
-          $(window).on('load', function() {
-            // If we're still showing the loader and the page is fully loaded, hide it
-            if (sessionStorage.getItem('isSearching') === 'true') {
-              setTimeout(function() {
-                $("#loading-overlay").fadeOut(500);
-                sessionStorage.removeItem('isSearching');
-              }, 500);
-            }
-          });
-
-          // Fallback: hide loader after 30 seconds maximum (in case something goes wrong)
-          setTimeout(function() {
-            if (sessionStorage.getItem('isSearching') === 'true') {
-              $("#loading-overlay").fadeOut(500);
-              sessionStorage.removeItem('isSearching');
-            }
-          }, 30000);
-
-          // Handle form submission
-          $('form[name="form-location"]').on("submit", function (e) {
-            // Validate form before showing loader
-            var location = $('input[name="location"]').val().trim();
-            var venue = $('select[name="venue"]').val();
-
-            if (!location) {
-              e.preventDefault();
-              alert("Please enter a location to search for.");
-              return false;
-            }
-
-            if (!venue) {
-              e.preventDefault();
-              alert("Please select a venue type.");
-              return false;
-            }
-
-            // Store loading state and show overlay
-            sessionStorage.setItem('isSearching', 'true');
-            $("#loading-overlay").fadeIn(300);
-
-            // Disable form submission button to prevent double-clicks
-            $('input[type="submit"]').prop("disabled", true).val("Searching...");
-
-            // Simulate progress and step transitions
-            simulateProgress();
-
-            // Form will submit normally after validation
-          });
-
-         // Hide loader if user navigates back or page refreshes
-         $(window).on("beforeunload", function () {
-           $("#loading-overlay").fadeOut(300);
-         });
-
-                  // Cancel search functionality
-          $("#cancel-search").on("click", function () {
-            $("#loading-overlay").fadeOut(300);
-            $('input[type="submit"]').prop("disabled", false).val("Search");
-            sessionStorage.removeItem('isSearching');
-
-            // Reset form if needed
-            // $('form[name="form-location"]')[0].reset();
-          });
-
-                  // Progress simulation function
-          function simulateProgress() {
-            var progress = 0;
-            var currentStep = 1;
-            var progressBar = $(".progress-fill");
-            var progressText = $(".progress-text");
-            var steps = $(".step");
-
-            var interval = setInterval(function () {
-              progress += Math.random() * 15 + 5; // Random progress increment
-
-              if (progress >= 100) {
-                progress = 100;
-                clearInterval(interval);
-
-                // When progress reaches 100%, wait a moment then hide loader
-                setTimeout(function() {
-                  $("#loading-overlay").fadeOut(500);
-                  sessionStorage.removeItem('isSearching');
-                }, 1000);
-              }
-
-              // Update progress bar
-              progressBar.css("width", progress + "%");
-
-              // Update progress text
-              if (progress < 30) {
-                progressText.text("Searching venues...");
-              } else if (progress < 60) {
-                progressText.text("Gathering popularity data...");
-                if (currentStep === 1) {
-                  steps.removeClass("active");
-                  steps.filter('[data-step="2"]').addClass("active");
-                  currentStep = 2;
-                }
-              } else if (progress < 90) {
-                progressText.text("Preparing results...");
-                if (currentStep === 2) {
-                  steps.removeClass("active");
-                  steps.filter('[data-step="3"]').addClass("active");
-                  currentStep = 3;
-                }
-              } else {
-                progressText.text("Almost done...");
-              }
-            }, 200);
+          if (!venue) {
+            e.preventDefault();
+            alert("Please select a venue type.");
+            return false;
           }
+
+          console.log("Validation passed, showing loader...");
+
+          // Show loading overlay
+          $("#loading-overlay").fadeIn(300);
+          console.log("Loader should be visible now");
+
+          // Disable form submission button to prevent double-clicks
+          $('input[type="submit"]').prop("disabled", true).val("Searching...");
+
+          // Simulate progress and step transitions
+          simulateProgress();
+
+          // Form will submit normally after validation
         });
+
+        // Cancel search functionality
+        $("#cancel-search").on("click", function () {
+          console.log("Cancel clicked");
+          $("#loading-overlay").fadeOut(300);
+          $('input[type="submit"]').prop("disabled", false).val("Search");
+        });
+
+        // Progress simulation function
+        function simulateProgress() {
+          console.log("Starting progress simulation...");
+          var progress = 0;
+          var currentStep = 1;
+          var progressBar = $(".progress-fill");
+          var progressText = $(".progress-text");
+          var steps = $(".step");
+
+          var interval = setInterval(function () {
+            progress += Math.random() * 15 + 5; // Random progress increment
+
+            if (progress >= 100) {
+              progress = 100;
+              clearInterval(interval);
+              console.log("Progress complete, hiding loader...");
+
+              // When progress reaches 100%, wait a moment then hide loader
+              setTimeout(function () {
+                $("#loading-overlay").fadeOut(500);
+              }, 1000);
+            }
+
+            // Update progress bar
+            progressBar.css("width", progress + "%");
+
+            // Update progress text
+            if (progress < 30) {
+              progressText.text("Searching venues...");
+            } else if (progress < 60) {
+              progressText.text("Gathering popularity data...");
+              if (currentStep === 1) {
+                steps.removeClass("active");
+                steps.filter('[data-step="2"]').addClass("active");
+                currentStep = 2;
+              }
+            } else if (progress < 90) {
+              progressText.text("Preparing results...");
+              if (currentStep === 2) {
+                steps.removeClass("active");
+                steps.filter('[data-step="3"]').addClass("active");
+                currentStep = 3;
+              }
+            } else {
+              progressText.text("Almost done...");
+            }
+          }, 200);
+        }
       });
     </script>
 
