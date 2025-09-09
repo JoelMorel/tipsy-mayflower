@@ -12,32 +12,7 @@
   </head>
 
   <body>
-    <!-- Nav Bar Code -->
-    <nav class="nav">
-      <div class="nav-container">
-        <div class="logo">
-          <a href="/"
-            ><img
-              src="{{ url_for('static', filename='img/d304cb2aa8604c0baf161bb63c28e76b.png') }}"
-              alt=""
-          /></a>
-        </div>
-        <div id="mainListDiv" class="main_list">
-          <ul class="navlinks">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
-        </div>
-        <span class="navTrigger">
-          <i></i>
-          <i></i>
-          <i></i>
-        </span>
-      </div>
-    </nav>
-
-    <!-- Nav Bar Code End -->
+    {% include 'navbar.html' %}
 
     <!-- Body Code -->
     <section class="main">
@@ -48,232 +23,296 @@
           />
         </div>
 
-        <h3 style="font-weight: bolder">1. Search For The City You Are In:</h3>
+        <div class="hero-content">
+          <h1>WhatIsLit?</h1>
+          <p>Find The Hottest Spots In Town</p>
+        </div>
 
         {% if error %}
-        <div
-          class="error-message"
-          style="
-            color: #ff4444;
-            background: #ffe6e6;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #ffaaaa;
-          "
-        >
-          {{ error }}
-        </div>
+        <div class="alert alert-danger">{{ error }}</div>
         {% endif %}
 
         <form action="/submit" method="POST" name="form-location">
-          <div class="form-group">
+          <div class="form-group location-input-group">
             <input
               type="text"
               name="location"
-              placeholder="neighborhood, city, or zipcode"
+              id="location-input"
+              placeholder="Search for a neighborhood, city, or zipcode"
             />
+            <button
+              type="button"
+              id="current-location-btn"
+              class="current-location-btn"
+              title="Use current location (click to allow location access)"
+            >
+              📍
+            </button>
           </div>
 
-          <!-- <h3 style="font-weight: bolder">OR</h3>
+          <!-- Location status display -->
+          <div
+            id="location-status"
+            class="location-status"
+            style="display: none"
+          >
+            <span id="location-text" class="location-text"></span>
+            <button
+              type="button"
+              id="clear-location"
+              class="clear-location-btn"
+            >
+              ✕
+            </button>
+          </div>
 
           <div class="form-group">
-            <select name="city">
-              <option value="">Select From Popular Locations:</option>
-              <optgroup label="New York City">
-                <option value="Manhattan">Manhattan</option>
-                <option value="Brooklyn">Brooklyn</option>
-                <option value="Queens">Queens</option>
-                <option value="Bronx">Bronx</option>
-                <option value="Staten Island">Staten Island</option>
-              </optgroup>
-              <option value="Atlantic City">Atlantic City</option>
-              <option value="Las Vegas">Las Vegas</option>
-              <option value="Miami">Miami</option>
-              <option value="San Jose">San Jose</option>
-            </select>
-          </div> -->
-
-          <h3 style="font-weight: bolder">
-            2. Select What Type Of Venues Are You Looking For:
-          </h3>
-
-          <div class="form-group">
-            <select name="venue">
-              <option value="">Select Type Of Venue:</option>
+            <select name="venue" id="venue-input" required>
+              <option value="">Select venue type...</option>
+              <option value="restaurant">Restaurant</option>
               <option value="bar">Bar</option>
+              <option value="club">Club</option>
               <option value="lounge">Lounge</option>
-              <option value="beergardens">Beer Gardens</option>
-              <option value="danceclubs">Night Clubs</option>
-              <option value="adultentertainment">Adult Entertainment</option>
+              <option value="cafe">Cafe</option>
+              <option value="brewery">Brewery</option>
+              <option value="pub">Pub</option>
+              <option value="nightclub">Nightclub</option>
+              <option value="rooftop">Rooftop Bar</option>
+              <option value="wine bar">Wine Bar</option>
+              <option value="cocktail bar">Cocktail Bar</option>
+              <option value="sports bar">Sports Bar</option>
+              <option value="dive bar">Dive Bar</option>
               <option value="karaoke">Karaoke</option>
+              <option value="dance club">Dance Club</option>
+              <option value="jazz club">Jazz Club</option>
+              <option value="comedy club">Comedy Club</option>
+              <option value="live music">Live Music Venue</option>
+              <option value="brewery">Brewery</option>
+              <option value="distillery">Distillery</option>
+              <option value="speakeasy">Speakeasy</option>
+              <option value="hookah lounge">Hookah Lounge</option>
+              <option value="billiards">Billiards/Pool Hall</option>
+              <option value="arcade bar">Arcade Bar</option>
+              <option value="rooftop bar">Rooftop Bar</option>
+              <option value="beer garden">Beer Garden</option>
+              <option value="wine tasting">Wine Tasting</option>
+              <option value="other">Other</option>
             </select>
           </div>
 
-          <input type="submit" value="Search" class="btn" />
+          <button type="submit" class="btn btn-primary">Find Hot Spots</button>
         </form>
       </div>
     </section>
 
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="loading-overlay" style="display: none">
-      <div class="loading-content">
-        <div class="loading-spinner"></div>
-        <h3>Searching for the hottest spots...</h3>
-        <p>This may take a few moments while we gather real-time data</p>
+    <!-- Body Code End -->
 
-        <!-- Progress bar -->
-        <div class="progress-container">
-          <div class="progress-bar">
-            <div class="progress-fill"></div>
-          </div>
-          <div class="progress-text">Initializing search...</div>
-        </div>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='css/navbar.css') }}"></script>
+    <script src="{{ url_for('static', filename='css/reset.css') }}"></script>
 
-        <!-- Loading steps -->
-        <div class="loading-steps">
-          <div class="step active" data-step="1">
-            <span class="step-number">1</span>
-            <span class="step-text">Searching venues...</span>
-          </div>
-          <div class="step" data-step="2">
-            <span class="step-number">2</span>
-            <span class="step-text">Gathering popularity data...</span>
-          </div>
-          <div class="step" data-step="3">
-            <span class="step-number">3</span>
-            <span class="step-text">Preparing results...</span>
-          </div>
-        </div>
-
-        <!-- Cancel button -->
-        <button id="cancel-search" class="btn-cancel">Cancel Search</button>
-      </div>
-    </div>
-
-    <footer>
-      <span>Copyright &copy;{{ year }}</span>
-    </footer>
-
-    <!-- Body Code End-->
-
-    <!-- Scripts Start Here -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
-    <!-- Function used to shrink nav bar removing paddings and adding black background -->
-    <script>
-      $(window).scroll(function () {
-        if ($(document).scrollTop() > 50) {
-          $(".nav").addClass("affix");
-          console.log("OK");
-        } else {
-          $(".nav").removeClass("affix");
-        }
-      });
-    </script>
-
-    <!-- Loading functionality -->
     <script>
       $(document).ready(function () {
-        console.log("Page loaded, setting up loading functionality...");
+        // Smooth scrolling for anchor links
+        $('a[href^="#"]').on("click", function (event) {
+          var target = $(this.getAttribute("href"));
+          if (target.length) {
+            event.preventDefault();
+            $("html, body")
+              .stop()
+              .animate(
+                {
+                  scrollTop: target.offset().top - 100,
+                },
+                1000
+              );
+          }
+        });
 
-        // Test if loading overlay exists
-        if ($("#loading-overlay").length > 0) {
-          console.log("✓ Loading overlay found in DOM");
-        } else {
-          console.log("✗ Loading overlay NOT found in DOM");
-        }
-
-        // Handle form submission
+        // Form validation
         $('form[name="form-location"]').on("submit", function (e) {
-          console.log("Form submitted!");
-
-          // Validate form before showing loader
-          var location = $('input[name="location"]').val().trim();
-          var venue = $('select[name="venue"]').val();
+          var location = $("#location-input").val().trim();
+          var venue = $("#venue-input").val();
 
           if (!location) {
             e.preventDefault();
-            alert("Please enter a location to search for.");
+            alert("Please enter a location.");
+            $("#location-input").focus();
             return false;
           }
 
           if (!venue) {
             e.preventDefault();
             alert("Please select a venue type.");
+            $("#venue-input").focus();
             return false;
           }
-
-          console.log("Validation passed, showing loader...");
-
-          // Show loading overlay
-          $("#loading-overlay").fadeIn(300);
-          console.log("Loader should be visible now");
-
-          // Disable form submission button to prevent double-clicks
-          $('input[type="submit"]').prop("disabled", true).val("Searching...");
-
-          // Simulate progress and step transitions
-          simulateProgress();
-
-          // Form will submit normally after validation
         });
 
-        // Cancel search functionality
-        $("#cancel-search").on("click", function () {
-          console.log("Cancel clicked");
-          $("#loading-overlay").fadeOut(300);
-          $('input[type="submit"]').prop("disabled", false).val("Search");
+        // Auto-hide alerts after 5 seconds
+        setTimeout(function () {
+          $(".alert").fadeOut();
+        }, 5000);
+
+        // Add loading state to form submission
+        $('form[name="form-location"]').on("submit", function () {
+          var submitBtn = $(this).find('button[type="submit"]');
+          var originalText = submitBtn.text();
+
+          submitBtn.prop("disabled", true).text("Searching...");
+
+          // Re-enable button after 10 seconds as fallback
+          setTimeout(function () {
+            submitBtn.prop("disabled", false).text(originalText);
+          }, 10000);
         });
 
-        // Progress simulation function
-        function simulateProgress() {
-          console.log("Starting progress simulation...");
-          var progress = 0;
-          var currentStep = 1;
-          var progressBar = $(".progress-fill");
-          var progressText = $(".progress-text");
-          var steps = $(".step");
+        // Add some visual feedback for form interactions
+        $("#location-input, #venue-input")
+          .on("focus", function () {
+            $(this).closest(".form-group").addClass("focused");
+          })
+          .on("blur", function () {
+            $(this).closest(".form-group").removeClass("focused");
+          })
+          .on("change", function () {
+            $(this).closest(".form-group").addClass("has-value");
+          });
 
-          var interval = setInterval(function () {
-            progress += Math.random() * 15 + 5; // Random progress increment
+        // Add some animation to the hero section
+        setTimeout(function () {
+          $(".hero-content").addClass("animate-in");
+        }, 200);
 
-            if (progress >= 100) {
-              progress = 100;
-              clearInterval(interval);
-              console.log("Progress complete, hiding loader...");
+        // Current location functionality
+        function setupCurrentLocationFeature() {
+          const locationInput = $("#location-input");
+          const currentLocationBtn = $("#current-location-btn");
+          const locationStatus = $("#location-status");
+          const locationText = $("#location-text");
+          const clearLocationBtn = $("#clear-location");
 
-              // When progress reaches 100%, wait a moment then hide loader
-              setTimeout(function () {
-                $("#loading-overlay").fadeOut(500);
-              }, 1000);
+          // Check if geolocation is supported
+          if (!navigator.geolocation) {
+            currentLocationBtn
+              .prop("disabled", true)
+              .attr("title", "Geolocation not supported");
+            return;
+          }
+
+          // Current location button click handler
+          currentLocationBtn.on("click", function () {
+            if (currentLocationBtn.prop("disabled")) {
+              return;
             }
 
-            // Update progress bar
-            progressBar.css("width", progress + "%");
+            currentLocationBtn.prop("disabled", true).text("⏳");
 
-            // Update progress text
-            if (progress < 30) {
-              progressText.text("Searching venues...");
-            } else if (progress < 60) {
-              progressText.text("Gathering popularity data...");
-              if (currentStep === 1) {
-                steps.removeClass("active");
-                steps.filter('[data-step="2"]').addClass("active");
-                currentStep = 2;
-              }
-            } else if (progress < 90) {
-              progressText.text("Preparing results...");
-              if (currentStep === 2) {
-                steps.removeClass("active");
-                steps.filter('[data-step="3"]').addClass("active");
-                currentStep = 3;
-              }
-            } else {
-              progressText.text("Almost done...");
-            }
-          }, 200);
+            const options = {
+              enableHighAccuracy: true,
+              timeout: 10000,
+              maximumAge: 300000, // 5 minutes
+            };
+
+            navigator.geolocation.getCurrentPosition(
+              function (position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+
+                // Use reverse geocoding to get a readable location
+                reverseGeocode(lat, lng, function (address) {
+                  if (address) {
+                    locationInput.val(address);
+                    locationText.text(`📍 Using: ${address}`);
+                    locationStatus.show();
+                  } else {
+                    // Fallback to coordinates if reverse geocoding fails
+                    const coordText = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+                    locationInput.val(coordText);
+                    locationText.text(`📍 Using coordinates: ${coordText}`);
+                    locationStatus.show();
+                  }
+
+                  currentLocationBtn.prop("disabled", false).text("📍");
+                });
+              },
+              function (error) {
+                currentLocationBtn.prop("disabled", false).text("📍");
+
+                let errorMessage =
+                  "Location access was denied or unavailable.\n\n";
+
+                if (error.code === 1) {
+                  errorMessage += "📍 To use current location:\n";
+                  errorMessage +=
+                    "1. Click the location icon in your browser's address bar\n";
+                  errorMessage += "2. Select 'Allow' for location access\n";
+                  errorMessage += "3. Refresh the page and try again\n\n";
+                  errorMessage +=
+                    "Or simply type your location manually below.";
+                } else if (error.code === 2) {
+                  errorMessage += "📍 Location is currently unavailable.\n";
+                  errorMessage +=
+                    "Please check your internet connection and try again,\n";
+                  errorMessage += "or enter your location manually below.";
+                } else if (error.code === 3) {
+                  errorMessage += "📍 Location request timed out.\n";
+                  errorMessage +=
+                    "Please try again or enter your location manually below.";
+                } else {
+                  errorMessage += "Please enter your location manually below.";
+                }
+
+                alert(errorMessage);
+              },
+              options
+            );
+          });
+
+          // Clear location button handler
+          clearLocationBtn.on("click", function () {
+            locationInput.val("");
+            locationStatus.hide();
+          });
+
+          // Reverse geocoding function
+          function reverseGeocode(lat, lng, callback) {
+            const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`;
+
+            $.ajax({
+              url: url,
+              method: "GET",
+              timeout: 5000,
+              success: function (data) {
+                if (data && data.locality && data.city) {
+                  let address = "";
+                  if (data.locality) address += data.locality;
+                  if (data.city && data.city !== data.locality) {
+                    address += (address ? ", " : "") + data.city;
+                  }
+                  if (data.principalSubdivision) {
+                    address +=
+                      (address ? ", " : "") + data.principalSubdivision;
+                  }
+
+                  callback(
+                    address ||
+                      `${data.locality || "Unknown"}, ${data.city || "Unknown"}`
+                  );
+                } else {
+                  callback(null);
+                }
+              },
+              error: function (xhr, status, error) {
+                callback(null);
+              },
+            });
+          }
         }
+
+        // Initialize current location feature
+        setupCurrentLocationFeature();
       });
     </script>
 
