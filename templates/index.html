@@ -98,7 +98,7 @@
               <option value="other">Other</option>
             </select>
           </div>
-          <p>
+          <p class="hint-text">
             Hint: Try using the city name or zipcode as the location. For larger
             cities, try using the neighborhood name. For smaller cities, try
             using the city name.
@@ -109,6 +109,45 @@
     </section>
 
     <!-- Body Code End -->
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <h3>Finding Hot Spots...</h3>
+        <p>
+          Searching for the most popular venues in your area. This may take a
+          moment.
+        </p>
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <div class="progress-text" id="progress-text">Starting search...</div>
+        </div>
+        <div class="loading-steps">
+          <div class="step" id="step-1">
+            <div class="step-number">1</div>
+            <div class="step-text">Validating location...</div>
+          </div>
+          <div class="step" id="step-2">
+            <div class="step-number">2</div>
+            <div class="step-text">Searching for venues...</div>
+          </div>
+          <div class="step" id="step-3">
+            <div class="step-number">3</div>
+            <div class="step-text">Analyzing popularity data...</div>
+          </div>
+          <div class="step" id="step-4">
+            <div class="step-number">4</div>
+            <div class="step-text">Preparing results...</div>
+          </div>
+        </div>
+        <button type="button" class="btn-cancel" id="cancel-search">
+          Cancel Search
+        </button>
+      </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -158,17 +197,102 @@
           $(".alert").fadeOut();
         }, 5000);
 
-        // Add loading state to form submission
-        $('form[name="form-location"]').on("submit", function () {
+        // Loading screen functionality
+        function showLoadingScreen() {
+          $("#loading-overlay").fadeIn(300);
+          startLoadingAnimation();
+        }
+
+        function hideLoadingScreen() {
+          $("#loading-overlay").fadeOut(300);
+          resetLoadingAnimation();
+        }
+
+        function startLoadingAnimation() {
+          let currentStep = 1;
+          const totalSteps = 4;
+          let progress = 0;
+
+          // Reset all steps
+          $(".step").removeClass("active");
+          $("#progress-fill").css("width", "0%");
+          $("#progress-text").text("Starting search...");
+
+          // Animate progress bar
+          const progressInterval = setInterval(() => {
+            progress += Math.random() * 15; // Random progress increments
+            if (progress > 100) progress = 100;
+
+            $("#progress-fill").css("width", progress + "%");
+
+            // Update current step
+            if (progress > 25 && currentStep === 1) {
+              currentStep = 2;
+              $("#step-1").addClass("active");
+              $("#progress-text").text("Searching for venues...");
+            } else if (progress > 50 && currentStep === 2) {
+              currentStep = 3;
+              $("#step-2").addClass("active");
+              $("#progress-text").text("Analyzing popularity data...");
+            } else if (progress > 75 && currentStep === 3) {
+              currentStep = 4;
+              $("#step-3").addClass("active");
+              $("#progress-text").text("Preparing results...");
+            } else if (progress >= 100 && currentStep === 4) {
+              $("#step-4").addClass("active");
+              $("#progress-text").text("Almost done...");
+              clearInterval(progressInterval);
+            }
+          }, 200);
+
+          // Store interval ID for cleanup
+          window.loadingProgressInterval = progressInterval;
+        }
+
+        function resetLoadingAnimation() {
+          if (window.loadingProgressInterval) {
+            clearInterval(window.loadingProgressInterval);
+            window.loadingProgressInterval = null;
+          }
+          $(".step").removeClass("active");
+          $("#progress-fill").css("width", "0%");
+        }
+
+        // Cancel search functionality
+        $("#cancel-search").on("click", function () {
+          hideLoadingScreen();
+          // Clear session storage
+          sessionStorage.removeItem("isSearching");
+          // Re-enable form
+          $('form[name="form-location"]')
+            .find('button[type="submit"]')
+            .prop("disabled", false)
+            .text("Find Hot Spots");
+        });
+
+        // Enhanced form submission with loading screen
+        $('form[name="form-location"]').on("submit", function (e) {
           var submitBtn = $(this).find('button[type="submit"]');
           var originalText = submitBtn.text();
 
+          // Set session storage flag for results page
+          sessionStorage.setItem("isSearching", "true");
+
+          // Show loading screen
+          showLoadingScreen();
+
+          // Disable submit button
           submitBtn.prop("disabled", true).text("Searching...");
 
-          // Re-enable button after 10 seconds as fallback
+          // Re-enable button after 30 seconds as fallback (in case of errors)
           setTimeout(function () {
-            submitBtn.prop("disabled", false).text(originalText);
-          }, 10000);
+            if ($("#loading-overlay").is(":visible")) {
+              hideLoadingScreen();
+              submitBtn.prop("disabled", false).text(originalText);
+              sessionStorage.removeItem("isSearching");
+              alert("Search timed out. Please try again.");
+            }
+          }, 30000);
         });
 
         // Add some visual feedback for form interactions

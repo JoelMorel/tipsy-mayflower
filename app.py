@@ -45,7 +45,7 @@ def validate_environment():
     missing_vars = []
     
     for var in required_vars:
-        if not app.config.get(var):
+        if not os.environ.get(var):
             missing_vars.append(var)
     
     if missing_vars:
@@ -129,6 +129,26 @@ def index():
         return render_template('index.html', year=datetime.now().year)
     except Exception as e:
         logger.error(f"Error in index route: {e}", exc_info=True)
+        abort(500)
+
+@app.route('/about')
+def about():
+    """About page route."""
+    try:
+        logger.info("About page accessed")
+        return render_template('about.html', year=datetime.now().year)
+    except Exception as e:
+        logger.error(f"Error in about route: {e}", exc_info=True)
+        abort(500)
+
+@app.route('/contact')
+def contact():
+    """Contact page route."""
+    try:
+        logger.info("Contact page accessed")
+        return render_template('contact.html', year=datetime.now().year)
+    except Exception as e:
+        logger.error(f"Error in contact route: {e}", exc_info=True)
         abort(500)
 
 @app.route('/submit', methods=['POST'])
