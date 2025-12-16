@@ -172,10 +172,16 @@
     </footer>
 
     <!-- Scripts Start Here -->
+    <script type="application/json" id="heatmap-data">
+      {{ {'points': heatmap_points|default([]), 'center': heatmap_center|default(None)}|tojson|safe }}
+    </script>
     <script type="text/javascript">
       var loc = `{{ location }}`;
-      window.HEATMAP_POINTS = {{ heatmap_points|tojson|safe }};
-      window.HEATMAP_CENTER = {{ heatmap_center|tojson|safe }};
+      var heatmapData = JSON.parse(
+        document.getElementById("heatmap-data").textContent
+      );
+      window.HEATMAP_POINTS = heatmapData.points;
+      window.HEATMAP_CENTER = heatmapData.center;
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
