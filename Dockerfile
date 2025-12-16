@@ -18,4 +18,5 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY . .
 
 # Use gunicorn for production (matching Procfile)
-CMD ["gunicorn", "app:app", "--workers", "2", "--bind", "0.0.0.0:${PORT:-5000}"]
+# Use shell form to allow environment variable expansion
+CMD gunicorn app:app --workers ${WEB_CONCURRENCY:-2} --bind 0.0.0.0:${PORT:-5000}
