@@ -29,7 +29,18 @@ This guide will help you deploy Tipsy Mayflower to Railway.
    - Select "Deploy from GitHub repo"
    - Choose your repository
 
-3. **Configure Environment Variables**:
+3. **Configure Deployment Branch** (if not deploying from `master`):
+
+   - After connecting your repository, click on your service
+   - Go to the **"Settings"** tab
+   - Scroll to **"Service Settings"** section
+   - Find **"GitHub Branch"** option
+   - Select your desired branch from the dropdown (e.g., `main`, `modernize-2025`, etc.)
+   - Railway will now deploy from this branch automatically
+
+   > **Note:** By default, Railway deploys from the `master` branch. If your default branch is `main` or you want to deploy from a different branch, you must configure it here.
+
+4. **Configure Environment Variables**:
 
    - In your Railway project dashboard, go to "Variables"
    - Add the following environment variables:
@@ -41,13 +52,13 @@ This guide will help you deploy Tipsy Mayflower to Railway.
      ```
    - Optionally set `WEB_CONCURRENCY` (defaults to 2 workers)
 
-4. **Deploy**:
+5. **Deploy**:
 
    - Railway will automatically detect your Python app
    - It will use your `Procfile` to start the application
-   - The deployment will begin automatically
+   - The deployment will begin automatically from your configured branch
 
-5. **Get your app URL**:
+6. **Get your app URL**:
    - Once deployed, Railway will provide you with a public URL
    - You can also set up a custom domain in the "Settings" tab
 
@@ -121,6 +132,23 @@ Your app is already configured with:
    - Go to "Settings" → "Domains"
    - Add your custom domain
    - Update DNS records as instructed
+
+## Changing Deployment Branch (For Existing Deployments)
+
+If you need to change the deployment branch for an existing Railway service:
+
+1. Go to your Railway project dashboard
+2. Click on your service
+3. Navigate to **"Settings"** tab
+4. Scroll to **"Service Settings"** section
+5. Find **"GitHub Branch"** dropdown
+6. Select your desired branch (e.g., `main`, `modernize-2025`, etc.)
+7. Railway will automatically redeploy from the new branch
+
+You can also manually trigger a deployment from the latest commit:
+
+- Use Command Palette: `CMD + K` (Mac) or `Ctrl + K` (Windows/Linux)
+- Select **"Deploy Latest Commit"**
 
 ## Troubleshooting
 
