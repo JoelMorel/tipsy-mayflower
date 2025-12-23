@@ -105,20 +105,19 @@ def process_heatmap_data(hot_spots: List[Dict[str, Any]]) -> Tuple[List[Dict[str
 def not_found_error(error):
     """Custom 404 error handler."""
     logger.warning(f"404 error: {request.url}")
-    return render_template('404.html', year=datetime.now().year), 404
+    return render_template('404.html'), 404
 
 @app.errorhandler(500)
 def internal_error(error):
     """Custom 500 error handler."""
     logger.error(f"500 error: {error}")
-    return render_template('500.html', year=datetime.now().year), 500
+    return render_template('500.html'), 500
 
 @app.errorhandler(429)
 def ratelimit_handler(e):
     """Rate limit exceeded error handler."""
     logger.warning(f"Rate limit exceeded for IP: {get_remote_address()}")
     return render_template('index.html', 
-                         year=datetime.now().year,
                          error="Too many requests. Please wait a moment before trying again."), 429
 
 @app.route('/')
@@ -126,7 +125,7 @@ def index():
     """Main page route."""
     try:
         logger.info("Index page accessed")
-        return render_template('index.html', year=datetime.now().year)
+        return render_template('index.html')
     except Exception as e:
         logger.error(f"Error in index route: {e}", exc_info=True)
         abort(500)
@@ -136,7 +135,7 @@ def about():
     """About page route."""
     try:
         logger.info("About page accessed")
-        return render_template('about.html', year=datetime.now().year)
+        return render_template('about.html')
     except Exception as e:
         logger.error(f"Error in about route: {e}", exc_info=True)
         abort(500)
@@ -146,7 +145,7 @@ def contact():
     """Contact page route."""
     try:
         logger.info("Contact page accessed")
-        return render_template('contact.html', year=datetime.now().year)
+        return render_template('contact.html')
     except Exception as e:
         logger.error(f"Error in contact route: {e}", exc_info=True)
         abort(500)
@@ -169,7 +168,6 @@ def submit():
         if not is_valid:
             logger.warning(f"Invalid input: {error_message}")
             return render_template('index.html', 
-                                year=datetime.now().year,
                                 error=error_message), 400
         
         logger.info(f"Processing request for location: {location}, venue: {venue}")
@@ -181,7 +179,6 @@ def submit():
         except Exception as e:
             logger.error(f"Error calling get_popularity.checkCity: {e}", exc_info=True)
             return render_template('index.html', 
-                                year=datetime.now().year,
                                 error="Unable to fetch location data. Please try again."), 500
         
         # Process heatmap data
@@ -195,7 +192,6 @@ def submit():
             heatmap_points=heatmap_points,
             heatmap_center=heatmap_center,
             google_maps_api_key=app.config.get('GOOGLE_MAPS_API_KEY', ''),
-            year=datetime.now().year,
         )
         
     except Exception as e:
