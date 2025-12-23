@@ -12,7 +12,7 @@
   <body>
     {% include 'navbar.html' %}
 
-    <div class="container" style="margin-top: 90px; padding-top: 20px;">
+    <div class="container" style="margin-top: 90px; padding-top: 20px">
       <div class="about-content">
         <h1>About WhatIsLit?</h1>
 
@@ -84,5 +84,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+    {% include 'footer.html' %}
   </body>
 </html>
