@@ -53,6 +53,7 @@
   height: 100%;
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
 .nav div.main_list ul {
@@ -63,6 +64,28 @@
   gap: 0.5rem;
   align-items: center;
   height: 100%;
+}
+
+/* User info display */
+.nav div.main_list .user-info {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-left: 0.5rem;
+}
+
+.nav div.main_list .user-info .user-name {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }
 
 .nav div.main_list ul li {
@@ -174,6 +197,22 @@
     background: rgba(255, 255, 255, 0.1);
     transform: none;
     padding-left: 2.5rem;
+  }
+
+  .nav div.main_list .user-info {
+    width: 100%;
+    margin: 1rem 0 0 0;
+    padding: 1rem 2rem;
+    border-radius: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .nav div.main_list .user-info .user-name {
+    max-width: 100%;
+    font-size: 1rem;
+    text-align: left;
   }
 }
 

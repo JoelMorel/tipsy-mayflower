@@ -38,6 +38,18 @@ limiter = Limiter(
     storage_uri="memory://"
 )
 
+# Context processor to get user info from proxy headers
+@app.context_processor
+def inject_user_info():
+    """Make user info available to all templates."""
+    # Get user email from proxy header
+    user_email = request.headers.get('X-Forwarded-Email', '')
+    
+    return {
+        'user_email': user_email,
+        'is_logged_in': bool(user_email)
+    }
+
 # Validate required environment variables on startup
 def validate_environment():
     """Validate that required environment variables are set."""
