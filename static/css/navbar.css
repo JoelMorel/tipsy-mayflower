@@ -121,6 +121,16 @@
 
 .navTrigger {
   display: none;
+  cursor: pointer;
+  width: 30px;
+  height: 25px;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1001;
 }
 
 /* Affix (scrolled) state */
@@ -130,6 +140,12 @@
 }
 
 /* Media qurey section */
+
+@media screen and (min-width: 769px) {
+  .navTrigger {
+    display: none !important;
+  }
+}
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .nav-container {
@@ -143,8 +159,7 @@
   }
 
   .navTrigger {
-    display: block;
-    z-index: 1001;
+    display: flex !important;
   }
 
   .nav div.logo img {
@@ -216,19 +231,7 @@
   }
 }
 
-/* Animation */
-
-.navTrigger {
-  cursor: pointer;
-  width: 30px;
-  height: 25px;
-  margin: auto;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 1001;
-}
+/* Animation - navTrigger styles are defined above */
 
 .navTrigger i {
   background-color: #fff;
