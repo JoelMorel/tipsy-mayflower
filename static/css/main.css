@@ -33,6 +33,13 @@ body {
   padding: 0 2rem;
 }
 
+/* Wider page container for About/Contact and similar pages */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
 /* Hero Logo */
 .hero-logo {
   width: 250px;
