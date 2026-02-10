@@ -255,6 +255,67 @@ select option:hover {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+.hint-wrapper {
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+.hint-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.2);
+  color: #333;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hint-icon:hover,
+.hint-icon:focus {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.hint-icon::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  max-width: 260px;
+  text-align: left;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.hint-icon:hover::after,
+.hint-icon:focus::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.hint-icon:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 2px;
+}
+
 /* Form group styling for dropdown */
 .form-group.has-value select {
   border-color: #009bff;

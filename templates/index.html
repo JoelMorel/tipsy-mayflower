@@ -98,11 +98,18 @@
               <option value="other">Other</option>
             </select>
           </div>
-          <p class="hint-text">
-            Hint: Try using the city name or zipcode as the location. For larger
-            cities, try using the neighborhood name. For smaller cities, try
-            using the city name.
-          </p>
+
+          <div class="hint-wrapper">
+            <button
+              type="button"
+              class="hint-icon"
+              data-tooltip="Hint: Try using the city name or zipcode as the location. For larger cities, try using the neighborhood name. For smaller cities, try using the city name."
+              aria-label="Search tips"
+            >
+              ?
+            </button>
+          </div>
+
           <button type="submit" class="btn btn-primary">Find Hot Spots</button>
           </form>
         </div>
