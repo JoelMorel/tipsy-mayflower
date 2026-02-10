@@ -835,6 +835,13 @@ p {
   color: rgba(255, 255, 255, 0.9);
 }
 
+/* Ensure long text wraps nicely in info sections */
+.contact-section p,
+.faq-item p {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
 /* Mobile code starts here */
 
 @media only screen and (max-width: 960px) {
@@ -846,6 +853,24 @@ p {
     margin: 1rem auto;
     overflow: auto;
     padding: 0 2rem;
+  }
+
+  /* Make wider pages comfortable on mobile */
+  .page-container {
+    padding: 0 1.25rem;
+  }
+
+  .about-section,
+  .contact-section {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .faq {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-item {
+    padding: 1.25rem 1rem;
   }
 
   /* Mobile loading overlay adjustments */
