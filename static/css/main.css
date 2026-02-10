@@ -17,12 +17,13 @@ body {
   background-image: radial-gradient(#e73c7e, #23a6d5, #23d5ab);
   background-size: 350% 250%;
   /* animation: gradient 15s ease infinite; */
+  overflow-x: hidden;
 }
 
 .main {
   margin-top: 90px;
   padding-top: 40px;
-  padding-bottom: 80px;
+  padding-bottom: 120px;
 }
 
 .container {
